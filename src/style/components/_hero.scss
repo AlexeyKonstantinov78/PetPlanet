@@ -1,0 +1,30 @@
+.hero {
+  padding-top: 218px;
+  padding-bottom: 245px;
+  color: $light;
+  background-color: $purple;
+  background-image: url('/img/bg-dog.png'), url('/img/pattern.svg');
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+  background-position: right, center;
+  // .hero__container
+
+  &__container {}
+
+  // .hero__text
+  &__img {
+    max-width: 810px;
+    margin-bottom: 50px;
+  }
+
+  &__text {
+    max-width: 420px;
+    font-family: $font-family;
+    font-weight: 400;
+    font-size: 24px;
+
+    // line-height: 34px; 
+    line-height: 140%;
+    color: $light;
+  }
+}

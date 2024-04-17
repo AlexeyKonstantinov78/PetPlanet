@@ -1,0 +1,85 @@
+.footer {
+  padding-top: 80px;
+  padding-bottom: 32px;
+  background-color: $green;
+  background-image: url('/img/paw.svg');
+  background-repeat: no-repeat;
+  color: $light;
+  background-position: 41vw 50px;
+
+  // .footer__container
+
+  &__container {
+    display: grid;
+    grid-template-areas:
+      'logo contacts'
+      'info contacts'
+    ;
+  }
+
+  &__logo {
+    grid-area: logo;
+    width: 331px;
+    margin-bottom: 50px;
+  }
+
+  // .footer__info
+
+  &__info {
+    grid-area: info;
+  }
+
+  // .footer__copyright
+
+  &__copyright {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  // .footer__text
+
+  &__text {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+
+  // .footer__list
+
+  &__list {}
+
+  // .footer__item
+
+  &__item {
+    margin-bottom: 3px;
+    font-size: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // .footer__link
+
+  &__link {}
+
+  // .footer__contacts
+
+  &__contacts {
+    grid-area: contacts;
+    justify-self: end;
+    font-style: normal;
+  }
+
+  // .footer__email
+
+  &__email {
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  &__social-list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

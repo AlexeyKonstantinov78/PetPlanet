@@ -14,23 +14,23 @@
 
 <body>
   <header class="header">
-    <div class="container">
+    <div class="container header__container">
       <img class="header__logo" src="img/logo.svg" alt="Логотип магазина PetPlanet">
     </div>
   </header>
   <main class="main">
     <div class="container">
-      <h1>Pet Planet - магазин товаров для животных</h1>
+      <h1 class="visually-hidden">Pet Planet - магазин товаров для животных</h1>
     </div>
     <section class="hero">
       <div class="container hero__container">
-        <h2>Товары для твоих любимцев</h2>
-        <img src="img/tittle.svg" alt="Заговловок Товары для твоих любимцев">
+        <h2 class="visually-hidden">Товары для твоих любимцев</h2>
+        <img class="hero__img" src="img/tittle.svg" alt="Заговловок Товары для твоих любимцев">
         <p class="hero__text">Большой выбор домиков, лежанок и&nbsp;кормов для кошек и&nbsp;собак</p>
       </div>
     </section>
     <section class="about">
-      <div class="container">
+      <div class="container about__container">
         <h2 class="about__title">О нас</h2>
         <div class="about__box">
           <div class="about__content">
@@ -45,7 +45,8 @@
       </div>
     </section>
     <section class="advantages">
-      <div class="container">
+      <div class="advantages__bg"></div>
+      <div class="container advantages__container">
         <h2 class="advantages__title">Наши преимущества</h2>
         <ul class="advantages__list">
           <li class="advantages__item">
@@ -72,7 +73,7 @@
       </div>
     </section>
     <section class="subscribe">
-      <div class="container">
+      <div class="container subscribe__container">
         <h2 class="subscribe__title">Подпишись на&nbsp;рассылку и&nbsp;узнавай о&nbsp;новинках первым!</h2>
         <form class="subscribe__form" action="#" method="post">
           <fieldset class="subscribe__field">
@@ -84,8 +85,8 @@
     </section>
   </main>
   <footer class="footer">
-    <div class="container">
-      <img src="img/logo.svg" alt="Логотип магазина PetPlanet">
+    <div class="container footer__container">
+      <img class="footer__logo" src="img/logo.svg" alt="Логотип магазина PetPlanet">
 
       <div class="footer__info">
         <p class="footer__copyright">©Petshop, 2024</p>
@@ -104,7 +105,7 @@
       </div>
       <address class="footer__contacts">
         <a class="footer__email" href="mailto:Petplanet@gmail.com">Petplanet@gmail.com</a>
-        <ul class="footer__list">
+        <ul class="footer__social-list">
           <li class="footer__item">
             <a class="footer__link" href="#" aria-label="Телеграмм PetPlanet">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
