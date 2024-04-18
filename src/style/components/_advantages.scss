@@ -1,0 +1,124 @@
+.advantages {
+  color: $light;
+  position: relative;
+
+  // .advantages__bg
+
+  &__bg {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    border-radius: 300px 300px 0 0;
+    background-color: $carrot;
+    background-image: url("/img/pattern.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  // .advantages__container
+
+  &__container {}
+
+  // .advantages__title
+
+  &__title {
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  // .advantages__list
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  // .advantages__item
+
+  &__item {
+    padding-top: 268px;
+    background-size: 256px;
+    background-position: top;
+    background-repeat: no-repeat;
+
+  }
+
+  &__item_dog-house {
+    background-image: url('/img/dog-house.png');
+  }
+
+  &__item_dog-fodder {
+    background-image: url('/img/dog-fodder.png');
+  }
+
+  &__item_dog {
+    background-image: url('/img/dog.png');
+  }
+
+
+  // .advantages__subtitle
+
+  &__subtitle {
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    width: min-content;
+    margin: 0 auto 12px;
+  }
+
+  // .advantages__text
+
+  &__text {
+    text-align: center;
+  }
+
+  // .advantages__count-box
+
+  &__count-box {
+    position: absolute;
+    top: -115px;
+    left: 0;
+    width: 306px;
+    height: 306px;
+    background-image: url("/img/star-green.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // .advantages__count
+
+  &__count {
+    font-weight: 700;
+    font-size: 52px;
+    text-align: center;
+  }
+
+  // .advantages__count-text
+
+  &__count-text {
+    width: min-content;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 396px;
+    height: 682px;
+    top: -338px;
+    right: 0;
+    background-image: url("/img/dog-pik.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1;
+  }
+}
