@@ -2,6 +2,7 @@
   color: $light;
   position: relative;
 
+
   // .advantages__bg
 
   &__bg {
@@ -13,6 +14,20 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    @include laptop {
+      padding: 80px 0;
+      border-radius: 200px 200px 0 0;
+    }
+
+    @include tablet {
+      border-radius: 120px 120px 0 0;
+    }
+
+    @include mobile {
+      padding: 80px 0;
+      border-radius: 80px 80px 0 0;
+    }
   }
 
   // .advantages__container
@@ -27,6 +42,17 @@
     line-height: 1.3;
     text-align: center;
     margin-bottom: 50px;
+
+    @include laptop {
+      font-size: 52px;
+      margin-bottom: 32px;
+    }
+
+    @include mobile {
+      max-width: 320px;
+      font-size: 30px;
+      margin-bottom: 24px;
+    }
   }
 
   // .advantages__list
@@ -35,6 +61,19 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+
+    @include laptop {
+      gap: 20px;
+    }
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    @include mobile {
+      gap: 32px;
+    }
   }
 
   // .advantages__item
@@ -45,6 +84,15 @@
     background-position: top;
     background-repeat: no-repeat;
 
+    @include laptop {
+      background-size: 160px;
+      padding-top: 172px;
+    }
+
+    @include mobile {
+      background-size: 80px;
+      padding-top: 86px;
+    }
   }
 
   &__item_dog-house {
@@ -68,6 +116,17 @@
     text-align: center;
     width: min-content;
     margin: 0 auto 12px;
+
+    @include laptop {
+      font-size: 24px;
+    }
+
+    @include tablet {}
+
+    @include mobile {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
   }
 
   // .advantages__text
@@ -91,6 +150,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @include laptop {
+      width: 257px;
+      height: 257px;
+      top: -102px;
+    }
+
+    @include tablet {
+      width: 201px;
+      height: 201px;
+    }
+
+    @include mobile {
+      width: 140px;
+      height: 140px;
+      top: -73px;
+    }
   }
 
   // .advantages__count
@@ -99,6 +175,18 @@
     font-weight: 700;
     font-size: 52px;
     text-align: center;
+
+    @include laptop {
+      font-size: 44px;
+    }
+
+    @include tablet {
+      font-size: 32px;
+    }
+
+    @include mobile {
+      font-size: 20px;
+    }
   }
 
   // .advantages__count-text
@@ -120,5 +208,26 @@
     background-repeat: no-repeat;
     background-size: contain;
     z-index: -1;
+
+    @include laptop {
+      width: 272px;
+      height: 469px;
+      top: -242px;
+      right: 8px;
+    }
+
+    @include tablet {
+      width: 202px;
+      height: 348px;
+      top: -176px;
+      right: -25px;
+    }
+
+    @include mobile {
+      width: 100px;
+      height: 169px;
+      top: -82px;
+      right: 0;
+    }
   }
 }

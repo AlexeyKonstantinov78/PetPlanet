@@ -6,25 +6,51 @@
   background-image: url('/img/bg-dog.png'), url('/img/pattern.svg');
   background-repeat: no-repeat;
   background-size: contain, cover;
-  background-position: right, center;
+  background-position: right bottom, center;
+
+  @include laptop {
+    padding: 148px 0 172px;
+  }
+
+  @include tablet {
+    padding: 108px 0 462px;
+    background-size: 655px 564px, cover;
+  }
+
+  @include mobile {
+    padding: 100px 0 283px;
+    background-size: 294px 256px, cover;
+  }
+
   // .hero__container
 
   &__container {}
 
   // .hero__text
   &__img {
-    max-width: 810px;
+    width: 810px;
+    max-width: 100%;
     margin-bottom: 50px;
+
+    @media (width <=1300px) {
+      width: 588px;
+    }
+
+    @include laptop {
+      margin-bottom: 32px;
+    }
+
+    @include mobile {
+      margin-bottom: 16px;
+    }
   }
 
   &__text {
     max-width: 420px;
-    font-family: $font-family;
-    font-weight: 400;
-    font-size: 24px;
 
-    // line-height: 34px; 
-    line-height: 140%;
-    color: $light;
+
+    @include laptop {
+      max-width: 360px;
+    }
   }
 }
