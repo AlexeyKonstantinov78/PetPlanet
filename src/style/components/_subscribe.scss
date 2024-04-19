@@ -96,7 +96,8 @@
       padding: 16px 24px;
 
       & span {
-        display: none;
+        position: fixed;
+        transform: scale(0);
       }
     }
 
