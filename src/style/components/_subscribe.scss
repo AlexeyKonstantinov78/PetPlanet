@@ -2,11 +2,13 @@
   padding-top: 120px;
   padding-bottom: 120px;
 
-  // .subscribe__container
+  @include laptop {
+    padding: 100px 0;
+  }
 
-  &__container {}
-
-  // .subscribe__title
+  @include mobile {
+    padding: 80px 0;
+  }
 
   &__title {
     max-width: 1000px;
@@ -16,6 +18,17 @@
     text-align: center;
     margin: 0 auto;
     margin-bottom: 50px;
+
+    @include laptop {
+      font-size: 44px;
+      margin-bottom: 32px;
+    }
+
+    @include tablet {}
+
+    @include mobile {
+      font-size: 30px;
+    }
   }
 
   // .subscribe__form
@@ -32,6 +45,12 @@
     padding: 0;
     border: none;
     margin: 0 auto;
+
+    @include tablet {
+      width: 100%;
+    }
+
+    @include mobile {}
   }
 
   // .subscribe__input
@@ -67,6 +86,19 @@
     display: flex;
     align-items: center;
     gap: 4px;
+
+    @include laptop {
+      font-size: 20px;
+      width: min-content;
+    }
+
+    @include mobile {
+      padding: 16px 24px;
+
+      & span {
+        display: none;
+      }
+    }
 
     &::after {
       content: '';
