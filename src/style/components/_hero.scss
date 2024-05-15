@@ -47,10 +47,32 @@
 
   &__text {
     max-width: 420px;
+    margin-bottom: 60px;
 
 
     @include laptop {
       max-width: 360px;
+    }
+  }
+
+  &__store-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: max-content;
+    background: $green;
+    border-radius: 40px;
+    padding: 16px 24px;
+    font-weight: 700;
+    text-align: center;
+    color: $light;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 16px;
+      height: 16px;
+      background: url('/img/arrow-to-store.svg') no-repeat center/contain;
     }
   }
 }
