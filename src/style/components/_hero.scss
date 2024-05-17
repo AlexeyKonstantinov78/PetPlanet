@@ -24,7 +24,25 @@
 
   // .hero__container
 
-  &__container {}
+  &_store {
+    background-color: $green;
+    background-image: url('/img/bg-cat.png'), url('/img/pattern.svg');
+    background-size: 839px, cover;
+    padding-bottom: 90px;
+
+    @include laptop {
+      background-size: 639px, cover;
+    }
+
+    @include tablet {
+      background-size: 100%, cover;
+      padding-bottom: 462px;
+    }
+
+    @include mobile {
+      padding-bottom: 294px;
+    }
+  }
 
   // .hero__text
   &__img {
@@ -97,4 +115,6 @@
       padding: 11px 24px;
     }
   }
+
+
 }
