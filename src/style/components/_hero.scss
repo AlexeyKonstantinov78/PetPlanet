@@ -67,6 +67,9 @@
     max-width: 420px;
     margin-bottom: 60px;
 
+    &_store {
+      margin-bottom: 0;
+    }
 
     @include laptop {
       max-width: 360px;
