@@ -57,7 +57,28 @@
 
   // .store__cart-button
 
-  &__cart-button {}
+  &__cart-button {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 28px;
+
+  }
+
+  &__cart-cnt {
+    position: relative;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    z-index: 2;
+  }
+
+  &__cart-icon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
 
   // .store__title
 
