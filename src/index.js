@@ -8,11 +8,9 @@ const changeActiveBtn = (event) => {
   });
 
   target.classList.add('store__category-button_active');
-};
 
-buttons.forEach((button) => {
-  button.addEventListener('click', changeActiveBtn);
-});
+  fetchProductByCategory(target.textContent);
+};
 
 const API_URL = 'https://necessary-cherry-alloy.glitch.me';
 
@@ -33,16 +31,6 @@ const createProductCard = (product) => {
 
   return productCard;
 };
-
-
-{/* <li class="store__item">
-  <article class="store__product product">
-    <img class="product__image" src="/img/photo.jpg" alt="Скандинавский домик для собаки">
-      <h3 class="product__title">Скандинавский домик для собаки</h3>
-      <p class="product__price">5400&nbsp;₽</p>
-      <button class="product__button-add-cart">Заказать</button>
-  </article>
-</li> */}
 
 const renderProducts = (products) => {
   productList.textContent = '';
@@ -70,3 +58,7 @@ const fetchProductByCategory = async (category) => {
 };
 
 fetchProductByCategory('Домики');
+
+buttons.forEach((button) => {
+  button.addEventListener('click', changeActiveBtn);
+});
