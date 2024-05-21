@@ -106,7 +106,9 @@
 
   // .store__item
 
-  &__item {}
+  &__item {
+    display: flex;
+  }
 
   // .store__product
 
