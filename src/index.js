@@ -1,20 +1,12 @@
-const buttons = document.querySelectorAll('.store__category-button');
-
-const changeActiveBtn = (event) => {
-  const target = event.target;
-
-  buttons.forEach((button) => {
-    button.classList.remove('store__category-button_active');
-  });
-
-  target.classList.add('store__category-button_active');
-
-  fetchProductByCategory(target.textContent);
-};
-
 const API_URL = 'https://necessary-cherry-alloy.glitch.me';
 
+const buttons = document.querySelectorAll('.store__category-button');
 const productList = document.querySelector('.store__list');
+const cartButton = document.querySelector('.store__cart-button');
+const cartCnt = document.querySelector('.store__cart-cnt');
+const modalOverlay = document.querySelector('.modal-overlay');
+const modalСloseButton = document.querySelector('.modal-overlay__close-button');
+const cartItemsList = document.querySelector('.modal__cart-items');
 
 const createProductCard = (product) => {
   const productCard = document.createElement('li');
@@ -57,8 +49,23 @@ const fetchProductByCategory = async (category) => {
   }
 };
 
-fetchProductByCategory('Домики');
+const changeCategory = (event) => {
+  const target = event.target;
+  const category = target.textContent;
+
+  buttons.forEach((button) => {
+    button.classList.remove('store__category-button_active');
+  });
+
+  target.classList.add('store__category-button_active');
+
+  fetchProductByCategory(category);
+};
 
 buttons.forEach((button) => {
-  button.addEventListener('click', changeActiveBtn);
+  button.addEventListener('click', changeCategory);
+
+  if (button.classList.contains('store__category-button_active')) {
+    fetchProductByCategory(button.textContent);
+  }
 });
