@@ -1,5 +1,6 @@
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 const DEFAULT_OPTIONS = {
   test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
@@ -37,6 +38,12 @@ export default defineConfig({
   publicDir: '../public',
   build: {
     outDir: '../dist',
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "./src/index.html"),
+        store: resolve(__dirname, "./src/store.html"),
+      },
+    }
   },
   plugins: [
     ViteImageOptimizer(
