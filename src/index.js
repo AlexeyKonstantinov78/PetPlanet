@@ -110,11 +110,8 @@ const addToCart = (productName) => {
 
 productList.addEventListener('click', ({ target }) => {
   if (target.closest('.product__button-add-cart')) {
-    // const id = target.dataset.id;
-    // addToCart(id);
+    const productId = parseInt(target.dataset.id, 10);
+    addToCart(productId);
 
-    const productCart = target.closest(".store__product");
-    const productName = productCart.querySelector(".product__title").textContent;
-    addToCart(productName);
   }
 });
