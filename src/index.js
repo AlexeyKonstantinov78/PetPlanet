@@ -8,16 +8,16 @@ const modalOverlay = document.querySelector('.modal-overlay');
 const modalСloseButton = document.querySelector('.modal-overlay__close-button');
 const cartItemsList = document.querySelector('.modal__cart-items');
 
-const createProductCard = (product) => {
+const createProductCard = ({ photoUrl, name, price, id }) => {
   const productCard = document.createElement('li');
   productCard.classList.add('store__item');
 
   productCard.innerHTML = `
     <article class="store__product product">
-      <img class="product__image" src="${API_URL + product.photoUrl}" alt="${product.name}" width="368" height="261">
-        <h3 class="product__title">${product.name}</h3>
-        <p class="product__price">${product.price}&nbsp;₽</p>
-        <button class="product__button-add-cart" data-id="${product.id}">Заказать</button>
+      <img class="product__image" src="${API_URL + photoUrl}" alt="${name}" width="368" height="261">
+        <h3 class="product__title">${name}</h3>
+        <p class="product__price">${price}&nbsp;₽</p>
+        <button class="product__button-add-cart" data-id="${id}">Заказать</button>
     </article>
   `;
 
@@ -49,8 +49,7 @@ const fetchProductByCategory = async (category) => {
   }
 };
 
-const changeCategory = (event) => {
-  const target = event.target;
+const changeCategory = ({ target }) => {
   const category = target.textContent;
 
   buttons.forEach((button) => {
@@ -67,5 +66,15 @@ buttons.forEach((button) => {
 
   if (button.classList.contains('store__category-button_active')) {
     fetchProductByCategory(button.textContent);
+  }
+});
+
+cartButton.addEventListener('click', () => {
+  modalOverlay.style.display = 'flex';
+});
+
+modalOverlay.addEventListener('click', ({ target }) => {
+  if (target === modalOverlay || target === modalСloseButton) {
+    modalOverlay.style.display = 'none';
   }
 });
