@@ -69,12 +69,52 @@ buttons.forEach((button) => {
   }
 });
 
+const renderCartItems = () => {
+  cartItemsList.textContent = '';
+  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+
+  cartItems.forEach(item => {
+    const listItem = document.createElement("li");
+    listItem.textContent = item;
+
+    cartItemsList.append(listItem);
+  });
+
+};
+
 cartButton.addEventListener('click', () => {
   modalOverlay.style.display = 'flex';
+  renderCartItems();
 });
 
 modalOverlay.addEventListener('click', ({ target }) => {
   if (target === modalOverlay || target === modalСloseButton) {
     modalOverlay.style.display = 'none';
+  }
+});
+
+const updateCartCount = () => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  cartCnt.textContent = cartItems.length;
+};
+
+updateCartCount();
+
+const addToCart = (productName) => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  cartItems.push(productName);
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+  updateCartCount();
+};
+
+productList.addEventListener('click', ({ target }) => {
+  if (target.closest('.product__button-add-cart')) {
+    // const id = target.dataset.id;
+    // addToCart(id);
+
+    const productCart = target.closest(".store__product");
+    const productName = productCart.querySelector(".product__title").textContent;
+    addToCart(productName);
   }
 });
