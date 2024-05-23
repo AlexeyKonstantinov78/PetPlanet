@@ -1,4 +1,5 @@
-const API_URL = 'https://necessary-cherry-alloy.glitch.me';
+import { API_URL, getStorage, setStorage } from './module/const.js';
+import { fetchProductByCategory, fetchProductsListCart } from './module/fetch.js';
 
 const buttons = document.querySelectorAll('.store__category-button');
 const productList = document.querySelector('.store__list');
@@ -7,6 +8,7 @@ const cartCnt = document.querySelector('.store__cart-cnt');
 const modalOverlay = document.querySelector('.modal-overlay');
 const modalСloseButton = document.querySelector('.modal-overlay__close-button');
 const cartItemsList = document.querySelector('.modal__cart-items');
+const cartTotalPrices = document.querySelector('.modal__cart-prices');
 
 const createProductCard = ({ photoUrl, name, price, id }) => {
   const productCard = document.createElement('li');
@@ -33,23 +35,7 @@ const renderProducts = (products) => {
   });
 };
 
-const fetchProductByCategory = async (category) => {
-  try {
-    const response = await fetch(`${API_URL}/api/products/category/${category}`)
-
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-
-    const products = await response.json();
-
-    renderProducts(products);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const changeCategory = ({ target }) => {
+const changeCategory = async ({ target }) => {
   const category = target.textContent;
 
   buttons.forEach((button) => {
@@ -58,28 +44,62 @@ const changeCategory = ({ target }) => {
 
   target.classList.add('store__category-button_active');
 
-  fetchProductByCategory(category);
+  const products = await fetchProductByCategory(category);
+  renderProducts(products);
 };
 
-buttons.forEach((button) => {
+buttons.forEach(async (button) => {
   button.addEventListener('click', changeCategory);
 
   if (button.classList.contains('store__category-button_active')) {
-    fetchProductByCategory(button.textContent);
+    const products = await fetchProductByCategory(button.textContent);
+    renderProducts(products);
   }
 });
 
-const renderCartItems = () => {
-  cartItemsList.textContent = '';
-  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+const createCartItem = ({ id, name, price, photoUrl }) => {
+  const elementProduct = document.createElement('li');
+  elementProduct.classList.add('modal__cart-item');
+  elementProduct.dataset.id = id;
+  elementProduct.innerHTML = `
+      <img class="modal__cart-item-image" src="${API_URL + photoUrl}" alt="${name}">
+      <h3 class="modal__cart-item-title">${name}</h3>
+      <div class="modal__cart-item-count">
+        <button class="modal__btn modal__minus">-</button>
+        <span class="modal__count">1</span>
+        <button class="modal__btn modal__plus">+</button>
+      </div>
+      <p class="modal__cart-item-price">${price}&nbsp;₽</p>
+  `;
 
-  cartItems.forEach(item => {
-    const listItem = document.createElement("li");
-    listItem.textContent = item;
+  return elementProduct;
+};
 
-    cartItemsList.append(listItem);
+const cartSummaryPrice = () => {
+  cartTotalPrices.textContent = '';
+
+  const productCard = document.querySelectorAll('.modal__cart-item');
+  let arrPrice = [];
+
+  productCard.forEach(product => {
+    const priceProduct = parseFloat(product.querySelector('.modal__cart-item-price').textContent);
+    arrPrice.push(priceProduct);
   });
+  const totalPrice = arrPrice.reduce((acc, price) => acc + price, 0);
+  cartTotalPrices.innerHTML = `${totalPrice}&nbsp;₽`;
+};
 
+const renderCartItems = async () => {
+  cartItemsList.textContent = '';
+  const cartItems = getStorage();
+  if (cartItems.length > 0) {
+    const productsCart = await fetchProductsListCart(cartItems);
+    productsCart.forEach(item => {
+      const listItem = createCartItem(item);
+      cartItemsList.append(listItem);
+    });
+  }
+  cartSummaryPrice();
 };
 
 cartButton.addEventListener('click', () => {
@@ -94,16 +114,16 @@ modalOverlay.addEventListener('click', ({ target }) => {
 });
 
 const updateCartCount = () => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  const cartItems = getStorage();
   cartCnt.textContent = cartItems.length;
 };
 
 updateCartCount();
 
 const addToCart = (productName) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  const cartItems = getStorage();
   cartItems.push(productName);
-  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  setStorage(cartItems);
 
   updateCartCount();
 };
@@ -112,6 +132,5 @@ productList.addEventListener('click', ({ target }) => {
   if (target.closest('.product__button-add-cart')) {
     const productId = parseInt(target.dataset.id, 10);
     addToCart(productId);
-
   }
 });
