@@ -194,13 +194,15 @@ const submitOrder = async (event) => {
   });
 
   const body = { products, storeId };
+  if (productsListCart.length === 0) return;
   const { orderId } = await fetchOrder(body);
 
   if (orderId) {
     clearStorage();
     updateCartCount();
     renderCartItems();
-    cartItemsList.textContent = `Заказ принят под номером #${orderId}`;
+    cartForm.reset();
+    cartItemsList.textContent = `Ваш заказ принят, номер #${orderId}`;
 
     setTimeout(() => {
       cartItemsList.textContent = '';
