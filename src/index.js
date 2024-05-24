@@ -89,15 +89,19 @@ const cartSummaryPrice = () => {
   cartTotalPrices.innerHTML = `${totalPrice}&nbsp;₽`;
 };
 
+const deleteProductCart = (id) => {
+  const listCartProduct = getStorage();
+  const listProductDeleteId = listCartProduct.filter(product => product != id);
+  setStorage(listProductDeleteId);
+};
+
 const productQuantityChange = ({ target }, productsCart) => {
-  console.log(target);
-  console.log(productsCart);
   const productCartElem = target.closest('.modal__cart-item');
   const productCount = productCartElem.querySelector('.modal__count');
   const productPrice = productCartElem.querySelector('.modal__cart-item-price');
   const id = productCartElem.dataset.id;
 
-  const defaultSummProduct = productsCart.find(item => item.id === id).price;
+  const defaultSummProduct = productsCart.find(item => item.id === id).price || 0;
 
   let countElement = parseFloat(productCount.textContent);
 
@@ -113,15 +117,21 @@ const productQuantityChange = ({ target }, productsCart) => {
     }
   }
 
-  productCount.textContent = countElement;
-  productPrice.textContent = defaultSummProduct * countElement;
+  if (countElement === 0) {
+    deleteProductCart(id);
+    updateCartCount();
+    renderCartItems();
+  } else {
+    productCount.textContent = countElement;
+    productPrice.textContent = defaultSummProduct * countElement;
+  }
 
   cartSummaryPrice();
 };
 
 const renderCartItems = async () => {
   cartItemsList.textContent = '';
-  const cartItems = getStorage();
+  let cartItems = getStorage();
   if (cartItems.length > 0) {
     const productsCart = await fetchProductsListCart(cartItems);
     productsCart.forEach(item => {
@@ -129,7 +139,10 @@ const renderCartItems = async () => {
       cartItemsList.append(listItem);
     });
     cartItemsList.addEventListener('click', (event) => {
-      productQuantityChange(event, productsCart);
+      const target = event.target;
+      if (target.closest('.modal__cart-item')) {
+        productQuantityChange(event, productsCart);
+      }
     });
   }
   cartSummaryPrice();
