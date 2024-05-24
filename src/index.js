@@ -1,5 +1,5 @@
-import { API_URL, getStorage, setStorage } from './module/const.js';
-import { fetchProductByCategory, fetchProductsListCart } from './module/fetch.js';
+import { API_URL, clearStorage, getStorage, setStorage } from './module/const.js';
+import { fetchOrder, fetchProductByCategory, fetchProductsListCart } from './module/fetch.js';
 
 const buttons = document.querySelectorAll('.store__category-button');
 const productList = document.querySelector('.store__list');
@@ -9,6 +9,7 @@ const modalOverlay = document.querySelector('.modal-overlay');
 const modalСloseButton = document.querySelector('.modal-overlay__close-button');
 const cartItemsList = document.querySelector('.modal__cart-items');
 const cartTotalPrices = document.querySelector('.modal__cart-prices');
+const cartForm = document.querySelector('.modal__cart-form');
 
 const createProductCard = ({ photoUrl, name, price, id }) => {
   const productCard = document.createElement('li');
@@ -101,17 +102,14 @@ const productQuantityChange = ({ target }, productsCart) => {
   const productPrice = productCartElem.querySelector('.modal__cart-item-price');
   const id = productCartElem.dataset.id;
 
-  const defaultSummProduct = productsCart.find(item => item.id === id).price || 0;
+  const defaultSummProduct = productsCart.find(item => item.id === id).price;
 
   let countElement = parseFloat(productCount.textContent);
 
   if (target.classList.contains('modal__plus')) {
-    console.log('+');
-
     countElement += 1;
   }
   if (target.classList.contains('modal__minus')) {
-    console.log('-');
     if (productCount.textContent >= 1) {
       countElement -= 1;
     }
@@ -180,3 +178,35 @@ productList.addEventListener('click', ({ target }) => {
     addToCart(productId);
   }
 });
+
+const submitOrder = async (event) => {
+  event.preventDefault();
+  const products = [];
+
+  const storeId = cartForm.store.value;
+
+  const productsListCart = cartItemsList.querySelectorAll('.modal__cart-item');
+  productsListCart.forEach(product => {
+    const id = product.dataset.id;
+    const quantity = parseFloat(product.querySelector('.modal__count').textContent);
+
+    products.push({ 'id': id, 'quantity': quantity });
+  });
+
+  const body = { products, storeId };
+  const { orderId } = await fetchOrder(body);
+
+  if (orderId) {
+    clearStorage();
+    updateCartCount();
+    renderCartItems();
+    cartItemsList.textContent = `Заказ принят под номером #${orderId}`;
+
+    setTimeout(() => {
+      cartItemsList.textContent = '';
+      modalOverlay.style.display = 'none';
+    }, 3000);
+  }
+}
+
+cartForm.addEventListener('submit', submitOrder);

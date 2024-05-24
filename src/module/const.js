@@ -6,3 +6,5 @@ export const getStorage = () => (JSON.parse(localStorage.getItem(KEY_STORAGE) ||
 export const setStorage = (cartItems) => {
   localStorage.setItem(KEY_STORAGE, JSON.stringify(cartItems));
 };
+
+export const clearStorage = () => localStorage.removeItem(KEY_STORAGE);
